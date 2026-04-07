@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Invasion of France 1940</title>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Oswald:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#080806;--khaki:#d4b94a;--kd:#8c7a2e;--kg:rgba(212,185,74,0.25);
+  --red:#c0392b;--red2:#e74c3c;--gd:#2a3a1a;--gm:#3d5220;
+  --pa:#ede0b8;--pb:#c9b070;--st:#8a9aaa;--ink:#14140e;
+  --green:#4caf50;--green2:rgba(76,175,80,0.15);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;height:100%;overflow:hidden;}
+body{background:var(--black);font-family:'Special Elite',monospace;color:var(--pa);}
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.06) 3px,rgba(0,0,0,0.06) 4px);pointer-events:none;z-index:9000;}
+
+/* CORNERS */
+.co{position:fixed;width:90px;height:90px;opacity:0.12;pointer-events:none;z-index:100;}
+.ctl{top:12px;left:12px;border-top:2px solid var(--khaki);border-left:2px solid var(--khaki);}
+.ctr{top:12px;right:12px;border-top:2px solid var(--khaki);border-right:2px solid var(--khaki);}
+.cbl{bottom:12px;left:12px;border-bottom:2px solid var(--khaki);border-left:2px solid var(--khaki);}
+.cbr{bottom:12px;right:12px;border-bottom:2px solid var(--khaki);border-right:2px solid var(--khaki);}
+
+/* MASTER WRAPPER */
+#wrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;}
+
+/* SCREENS */
+.screen{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;padding:28px 60px;gap:14px;text-align:center;}
+.screen.active{display:flex;animation:fi 0.6s ease;}
+@keyframes fi{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+/* GLOBAL PROGRESS BAR */
+#gbar{position:fixed;top:0;left:0;height:5px;background:var(--khaki);transition:width 0.4s linear;z-index:9999;box-shadow:0 0 8px var(--khaki);}
+
+/* ── INTRO SCREEN ── */
+.stamp{font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:7px;text-transform:uppercase;color:var(--khaki);border:1px solid var(--kd);padding:5px 22px;display:inline-block;animation:bl 2.4s infinite;}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:0.35}}
+.big-em{font-size:90px;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;filter:drop-shadow(0 0 30px var(--kg));animation:flt 3.5s ease-in-out infinite;}
+@keyframes flt{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+h1.mt{font-family:'Oswald',sans-serif;font-size:clamp(36px,5.5vw,74px);font-weight:700;text-transform:uppercase;letter-spacing:5px;color:var(--khaki);text-shadow:0 0 40px var(--kg),0 2px 0 rgba(0,0,0,0.8);}
+.msub{font-family:'Oswald',sans-serif;font-size:15px;color:var(--st);letter-spacing:4px;text-transform:uppercase;}
+.dv{width:65%;height:2px;background:linear-gradient(to right,transparent,var(--kd),transparent);margin:2px auto;}
+.rqbox{background:rgba(42,58,26,0.5);border:1px solid var(--kd);border-left:5px solid var(--khaki);padding:20px 30px;max-width:820px;text-align:left;font-family:'Lora',serif;font-style:italic;font-size:16px;line-height:1.8;color:var(--pb);}
+.rqbox strong{font-family:'Oswald',sans-serif;font-style:normal;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--khaki);display:block;margin-bottom:8px;}
+.rules{font-family:'Lora',serif;font-size:14px;line-height:2.0;color:var(--st);max-width:680px;}
+.rules b{color:var(--pb);font-style:normal;}
+.credits{font-size:13px;letter-spacing:1px;color:var(--st);line-height:2.2;}
+
+/* ── LEVEL BADGE ── */
+#lvl-screen{gap:22px;}
+.lbadge-big{font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:5px;text-transform:uppercase;background:var(--khaki);color:var(--black);padding:8px 28px;display:inline-block;}
+.lbadge-big.l2{background:var(--red);color:var(--pa);}
+.ltitle{font-family:'Oswald',sans-serif;font-size:clamp(28px,5vw,58px);font-weight:700;text-transform:uppercase;letter-spacing:3px;}
+.ldesc{font-family:'Lora',serif;font-size:16px;line-height:1.9;color:var(--pb);max-width:620px;}
+.lvl-icon{font-size:80px;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;filter:drop-shadow(0 0 20px rgba(212,185,74,0.4));}
+
+/* ── QUESTION SCREEN ── */
+#q-screen{padding:16px 36px;gap:8px;justify-content:flex-start;padding-top:18px;}
+.q-header{width:100%;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--kd);padding-bottom:10px;}
+.q-lvl-badge{font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:3px;text-transform:uppercase;background:var(--gd);border:1px solid var(--kd);padding:6px 16px;color:var(--khaki);}
+.q-lvl-badge.l2{background:rgba(192,57,43,0.25);border-color:var(--red);}
+.q-num{font-family:'Oswald',sans-serif;font-size:14px;letter-spacing:2px;color:var(--st);text-transform:uppercase;}
+
+.trow{width:100%;display:flex;align-items:center;gap:14px;}
+.tlabel{font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:3px;color:var(--st);text-transform:uppercase;white-space:nowrap;}
+.tbb{flex:1;height:9px;background:rgba(255,255,255,0.07);border-radius:4px;overflow:hidden;}
+.tbf{height:100%;background:var(--khaki);border-radius:4px;transition:width 0.1s linear,background 0.3s;}
+.tbf.warn{background:var(--red2);}
+.tnum{font-family:'Oswald',sans-serif;font-size:24px;font-weight:700;color:var(--khaki);min-width:34px;text-align:right;line-height:1;}
+.tnum.warn{color:var(--red2);}
+
+.qcard{width:100%;background:rgba(42,58,26,0.28);border:1px solid var(--kd);padding:22px 32px;position:relative;overflow:hidden;}
+.qbge{position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:110px;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;opacity:0.18;pointer-events:none;user-select:none;}
+.qnl{font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--khaki);margin-bottom:10px;}
+.qt{font-family:'Lora',serif;font-size:clamp(15px,1.8vw,21px);line-height:1.7;color:var(--pa);max-width:88%;position:relative;z-index:2;}
+
+.ag{width:100%;display:flex;flex-direction:column;gap:9px;}
+.ab{background:rgba(8,8,6,0.6);border:1.5px solid rgba(212,185,74,0.18);color:var(--pb);font-family:'Lora',serif;font-size:clamp(13px,1.2vw,16px);line-height:1.55;padding:15px 20px;text-align:left;display:flex;align-items:flex-start;gap:14px;}
+.al{font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;color:var(--kd);min-width:22px;flex-shrink:0;margin-top:2px;}
+.ab.ok{border-color:var(--green);background:rgba(76,175,80,0.14);color:#a5d6a7;}
+.ab.ok .al{color:var(--green);}
+.ab.ng{opacity:0.35;}
+
+/* ── REVEAL LAYOUT ── */
+.reveal-wrap{width:100%;display:none;flex-direction:column;gap:10px;animation:fi 0.5s ease;}
+.reveal-wrap.active{display:flex;}
+
+.correct-banner{width:100%;background:rgba(76,175,80,0.15);border:1.5px solid var(--green);border-left:5px solid var(--green);padding:13px 22px;font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#a5d6a7;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.correct-banner .ans-text{font-family:'Lora',serif;font-size:15px;letter-spacing:0;text-transform:none;color:#c8e6c9;font-style:italic;}
+
+.evidence-row{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:18px;flex:1;min-height:0;}
+@media(max-width:900px){.evidence-row{grid-template-columns:1fr;}}
+
+.justification{background:rgba(42,58,26,0.45);border:1px solid var(--kd);border-left:5px solid var(--khaki);padding:18px 24px;display:flex;flex-direction:column;gap:8px;overflow-y:auto;}
+.jlabel{font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--khaki);flex-shrink:0;}
+.jtext{font-family:'Lora',serif;font-size:clamp(12px,1.1vw,15px);line-height:1.82;color:var(--pb);flex:1;}
+.citation-line{font-family:'Special Elite',monospace;font-size:11px;color:var(--st);border-top:1px solid rgba(212,185,74,0.15);padding-top:8px;flex-shrink:0;line-height:1.6;}
+
+/* PHOTO CONTAINER FIX */
+.evidence-card {
+  background: rgba(8, 8, 6, 0.7);
+  border: 1px solid var(--kd);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 100%;
+}
+.ev-label{font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--black);background:var(--khaki);padding:6px 14px;flex-shrink:0;}
+
+.photo-container {
+  width: 400px;
+  height: 400px;
+  margin: 20px auto; 
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  border: 2px solid rgba(212,185,74,0.5); 
+  box-shadow: 0 0 15px rgba(0,0,0,0.5); 
+}
+
+#q-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  
+  display: block;
+}
+.photo-footer {
+  padding: 10px 15px;
+  background: rgba(0,0,0,0.4);
+  border-top: 1px solid rgba(212,185,74,0.1);
+}
+.photo-desc {
+  font-family: 'Lora', serif;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--st);
+  font-style: italic;
+}
+
+/* ── OUTRO ── */
+#outro-screen{gap:18px;}
+.outro-medal{font-size:92px;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;animation:flt 3s ease-in-out infinite;filter:drop-shadow(0 0 25px rgba(212,185,74,0.5));}
+.outro-title{font-family:'Oswald',sans-serif;font-size:clamp(24px,4vw,48px);font-weight:700;text-transform:uppercase;letter-spacing:4px;color:var(--khaki);}
+.outro-sources{background:rgba(42,58,26,0.4);border:1px solid var(--kd);padding:20px 30px;max-width:800px;text-align:left;}
+.outro-sources h3{font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--khaki);margin-bottom:12px;}
+.outro-sources ol{padding-left:22px;font-family:'Lora',serif;font-size:12px;line-height:2.1;color:var(--pb);}
+/* Обновленные стили для финального экрана */
+#outro-screen {
+    padding: 40px 60px;
+    justify-content: flex-start; /* Чтобы текст шел сверху вниз */
+    overflow-y: auto; /* На случай, если текста будет много */
+}
+
+.outro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Две колонки пополам */
+    gap: 40px;
+    width: 100%;
+    max-width: 1200px;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.outro-column h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--khaki);
+    border-bottom: 1px solid var(--kd);
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+}
+
+/* Стиль APA с висячим отступом */
+.apa-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.apa-item {
+    font-family: 'Lora', serif;
+    font-size: 11px;
+    line-height: 1.6;
+    color: var(--pb);
+    margin-bottom: 12px;
+    padding-left: 30px; /* Отступ для всех строк */
+    text-indent: -30px; /* Возврат первой строки назад */
+}
+
+/* Ищи этот фрагмент в CSS и замени его */
+.apa-item em {
+    font-style: italic; /* Это делает текст курсивом */
+    color: inherit;     /* Это заставит текст использовать тот же цвет, что и у остальной строки */
+}
+
+.apa-item a {
+    color: var(--st);
+    text-decoration: none;
+    word-break: break-all;
+}
+</style>
+</head>
+<body>
+<div class="co ctl"></div><div class="co ctr"></div><div class="co cbl"></div><div class="co cbr"></div>
+<div id="gbar" style="width:0%"></div>
+<div id="wrap">
+
+  <div class="screen active" id="intro-screen">
+    <div class="stamp">⚡ Classified War Intelligence ⚡</div>
+    <div class="big-em">⚔️</div>
+    <h1 class="mt">The Invasion<br>of France</h1>
+    <div class="msub">Interactive Historical Investigation · 1940</div>
+    <div class="dv"></div>
+    <div class="rqbox">
+      <strong>Research Question</strong>
+      How did the German invasion of France in 1940 demonstrate the impact of conflicting ideologies on political cooperation in Europe?
+    </div>
+    <div class="rules">
+      <b>Rules:</b> Each question is displayed for <b>12 seconds</b>.<br>
+      Read the question carefully, then state your answer aloud.<br>
+      After 12 seconds, the correct answer is revealed with historical evidence for <b>18 seconds</b>.
+    </div>
+    <div class="dv"></div>
+    <div class="credits">
+      Shayakhmetova Madiya &nbsp;·&nbsp; Khamitova Azel &nbsp;·&nbsp; Kassimov Alimzhan<br>
+      Grade 10F · World History · Nazarbayev Intellectual School of Astana · 2025–2026
+    </div>
+  </div>
+
+  <div class="screen" id="lvl-screen">
+    <div id="lvl-badge" class="lbadge-big">Level 1</div>
+    <div id="lvl-icon" class="lvl-icon">🗺️</div>
+    <div id="lvl-title" class="ltitle">Basic Understanding</div>
+    <div id="lvl-desc" class="ldesc"></div>
+  </div>
+
+  <div class="screen" id="q-screen">
+    <div class="q-header">
+      <span class="q-lvl-badge" id="q-badge">Level 1 · Basic Understanding</span>
+      <span class="q-num" id="q-num">Question 1 / 4</span>
+    </div>
+    <div class="trow">
+      <span class="tlabel">TIME</span>
+      <div class="tbb"><div class="tbf" id="tbar" style="width:100%"></div></div>
+      <span class="tnum" id="tnum">12</span>
+    </div>
+    <div id="ask-phase" style="width:100%;display:flex;flex-direction:column;gap:10px;">
+      <div class="qcard">
+        <div class="qbge" id="qbge">🗺️</div>
+        <div class="qnl" id="qnl">Question 1</div>
+        <div class="qt" id="qtext"></div>
+      </div>
+      <div class="ag" id="ag"></div>
+    </div>
+    <div class="reveal-wrap" id="reveal-phase">
+      <div class="correct-banner" id="correct-banner">
+        <span>✓ CORRECT ANSWER —</span>
+        <span class="ans-text" id="ans-text"></span>
+      </div>
+      <div class="evidence-row">
+        <div class="justification">
+          <div class="jlabel">📋 Historical Justification</div>
+          <div class="jtext" id="jtext"></div>
+          <div class="citation-line" id="citation"></div>
+        </div>
+        <div class="evidence-card">
+          <div class="ev-label">🔍 Visual Evidence</div>
+          <div class="photo-container">
+            <img id="q-img" src="" alt="Historical evidence">
+          </div>
+          <div class="photo-footer">
+            <div class="photo-desc" id="ev-caption"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen" id="outro-screen">
+    <div class="outro-medal">🏆</div>
+    <div class="outro-title">Investigation Complete</div>
+    <div class="dv" style="width:100%; max-width:1200px;"></div>
+
+    <div class="outro-grid">
+        <div class="outro-column">
+            <h3>Reference List</h3>
+            <div class="apa-list">
+                <div class="apa-item">Boissoneault, L. (2017, November 9). <em>Was Vichy France a Puppet Government or a Willing Nazi Collaborator?</em> Smithsonian Magazine. https://www.smithsonianmag.com/history/vichy-government-france-world-war-ii-willingly-collaborated-nazis-180967160/</div>
+                <div class="apa-item">Dunkirk evacuation | <em>Facts, Map, Photos, Numbers, Timeline, & Summary.</em> (2026, March 26). Britannica. https://www.britannica.com/event/Dunkirk-evacuation</div>
+                <div class="apa-item"><em>Fall of France in World War 2: France Surrenders to Germany.</em> (n.d.). Academic Block. https://www.academicblock.com/history/world-war-2/france-surrenders-to-germany</div>
+                <div class="apa-item">Fontaine, T. (2007, November 19). <em>Chronology of Repression and Persecution in Occupied France, 1940-44.</em> Sciences Po. https://www.sciencespo.fr/mass-violence-war-massacre-resistance/en/document/chronology-repress-ion-and-persecution-occupied-france-1940-44.html</div>
+                <div class="apa-item"><em>France in WW II: The French Resistance: Print Resources.</em> (2007, June 19). Library of Congress. https://guides.loc.gov/french-resistance-world-war-two/print-resources</div>
+                <div class="apa-item"><em>League of Nations | History, Definition & Purpose.</em> (2026, February 6). Britannica. https://www.britannica.com/topic/League-of-Nations</div>
+                <div class="apa-item"><em>Nazism | Definition, Leaders, Ideology, Fascism, & History.</em> (2026, April 3). Britannica. https://www.britannica.com/event/Nazism</div>
+                <div class="apa-item">Ray, M. (2026, March 2). <em>Vichy France | History, Leaders, & Map.</em> Britannica. https://www.britannica.com/event/Vichy-France</div>
+            </div>
+        </div>
+
+        <div class="outro-column">
+            <h3>List of Figures</h3>
+            <div class="apa-list">
+                <div class="apa-item">Fig. 1. San Jose., (2006). <em>Second world war europe 1940 map pl2</em> [Map]. Wikimedia Commons. https://commons.wikimedia.org/wiki/File:Second_world_war_europe_1940_map_pl2.png</div>
+                <div class="apa-item">Fig. 2. Malindine (Capt)., (1940). <em>The British Army in France 1940</em> [Photograph]. Imperial War Museums. https://www.iwm.org.uk/collections/item/object/8753</div>
+                <div class="apa-item">Fig. 3. Library of Congress., (1942). <em>Charles de Gaulle shown in 1942</em> [Photograph]. Defense Media Network. https://www.defensemedianetwork.com/stories/the-power-of-wont-charles-de-gaulle-and-the-free-french/</div>
+                <div class="apa-item">Fig. 4. Eric Gaba (Sting)., (2008). <em>France 1940 - Plan de bataille</em> [Map]. Wikimedia Commons. https://commons.wikimedia.org/wiki/File:France_1940-Plan_de_bataille.svg</div>
+                <div class="apa-item">Fig. 5. Borchert E., (1940). <em>Frankreich, Panzer 35t und Panzer IV</em> [Photograph]. Bundesarchiv. https://www.bild.bundesarchiv.de/dba/de/search/?query=Borchert+Erich</div>
+                <div class="apa-item">Fig. 6. Encyclopaedia Britannica., (n.d.). <em>Occupation of France, 1940–44</em> [Map]. Britannica. https://www.britannica.com/event/Vichy-France</div>
+                <div class="apa-item">Fig. 7. Bundesarchiv., (1940). <em>Waffenstillstand von Compiègne, Hitler, Göring</em> [Photograph]. Wikipedia. https://de.wikipedia.org/wiki/Datei:Bundesarchiv_Bild_183-M1112-500,_Waffenstillstand_von_Compi%C3%A8gne,_Hitler,_G%C3%B6ring.jpg</div>
+                <div class="apa-item">Fig. 8. United Nations., (1920). <em>The official opening of the League of Nations</em> [Photograph]. UPI. https://www.upi.com/Top_News/2020/11/15/On-This-Day-League-of-Nations-assembles-for-first-time/5431605412514/</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="credits" style="margin-top:30px; width:100%; border-top: 1px dashed var(--kd); padding-top: 15px;">
+        Shayakhmetova Madiya · Khamitova Azel · Kassimov Alimzhan<br>
+        Grade 10F · World History · Nazarbayev Intellectual School in Astana · 2025–2026
+    </div>
+</div>
+
+</div>
+
+<script>
+const QUESTIONS = [
+  {
+    level: 1,
+    emoji: "🏛️",
+    text: "What political ideologies influenced France and Germany before the invasion of 1940?",
+    options: [
+      "France: Liberal Democracy; Germany: National Socialism (Nazism)",
+      "France: Fascism; Germany: Communism",
+      "France: Monarchism; Germany: Liberal Democracy"
+    ],
+    correct: 0,
+    justification: "France functioned as a parliamentary liberal democracy upholding elected government and civil liberties. Nazi Germany was governed by National Socialism, a totalitarian ideology rooted in racial supremacy and extreme nationalism. These fundamentally opposed systems made genuine political cooperation structurally impossible, creating the ideological precondition for the 1940 conflict.",
+    citation: "(Nazism | Definition, Leaders, Ideology, Fascism, & History, 2026)",
+    img_url: "https://upload.wikimedia.org/wikipedia/commons/e/e4/Second_world_war_europe_1940_map_pl2.png",
+    ev_caption: "Fig. 1. San Jose., (2006). Second world war europe 1940 map pl2 [Map]. Wikimedia Commons. https://commons.wikimedia.org/wiki/File:Second_world_war_europe_1940_map_pl2.png"
+  },
+  {
+    level: 1,
+    emoji: "🤝",
+    text: "Which countries failed to cooperate with France effectively during the German invasion in 1940?",
+    options: [
+      "The United Kingdom and Belgium — Britain prioritised Dunkirk; Belgium surrendered without consultation",
+      "The United States and the Soviet Union — both remained neutral in Western Europe",
+      "Poland and Czechoslovakia — both had already been occupied by Germany"
+    ],
+    correct: 0,
+    justification: "The Dunkirk evacuation (Operation Dynamo) rescued over 338,000 soldiers, but the decision exposed deep strategic divergence as Britain prioritised its own forces, leaving French units to hold the perimeter. Belgium's unilateral surrender on 28 May opened a critical gap in the Allied line, fracturing cohesion at a decisive moment.",
+    citation: "(Dunkirk Evacuation | Facts, Map, Photos, Numbers, Timeline, & Summary, 2026)",
+    img_url: "https://media.iwm.org.uk/ciim5/285/85/large_000000.jpg", 
+    ev_caption: "Fig. 2. Malindine (Capt)., (1940). The British Army in France 1940 [Photograph]. Imperial War Museums. https://www.iwm.org.uk/collections/item/object/8753"
+  },
+  {
+    level: 1,
+    emoji: "✊",
+    text: "Which countries refused to cooperate with Germany during and after the invasion of France in 1940?",
+    options: [
+      "The United Kingdom and Free France under General de Gaulle — both continued armed resistance",
+      "The Soviet Union and the United States — both declared war following the fall of Paris",
+      "Spain and Portugal — both mobilised their armies against Germany"
+    ],
+    correct: 0,
+    justification: "Churchill's Britain categorically rejected all German peace overtures, committing to resistance rooted in democratic values. General Charles de Gaulle's Free France movement became the ideological antithesis of Vichy collaboration. This defiance demonstrated that shared democratic ideology could sustain resistance even after military defeat.",
+    citation: "(Spencer, 2023)",
+    img_url: "https://i0.wp.com/www.defensemedianetwork.com/wp-content/uploads/2011/09/De_Gaulle-OWI-1942.jpg?ssl=1",
+    ev_caption: "Fig. 3. Library of Congress., (1942). Charles de Gaulle shown in 1942 [Photograph]. Defense Media Network. https://www.defensemedianetwork.com/stories/the-power-of-wont-charles-de-gaulle-and-the-free-french/"
+  },
+  {
+    level: 1,
+    emoji: "⚔️",
+    text: "How did the German attack on Sedan in May 1940 demonstrate Nazi ideological priorities?",
+    options: [
+      "Germany violated neutral borders without declaration and rejected all diplomatic norms",
+      "Germany obtained permission from the League of Nations before crossing borders",
+      "Germany negotiated a formal transit agreement with Belgium and Luxembourg"
+    ],
+    correct: 0,
+    justification: "The German breakthrough at Sedan in May 1940 served as a practical application of National Socialist ideology where the 'will to power' and the cult of offensive action took precedence over established international norms. This operation demonstrated a profound contempt for the 'rationalist' legal frameworks of the West as Germany bypassed diplomatic declarations to launch a high speed 'Blitzkrieg' through neutral Belgium, Luxembourg, and the Netherlands. By utilizing the Ardennes forest, a route considered impassable by French 'intellectual' military logic, the Nazi leadership aimed to prove the superiority of the 'Aryan' soldier's intuition and daring over the static, defensive mentality of parliamentary democracies. The attack was not merely a strategic maneuver but a manifestation of the 'Lebensraum' doctrine, asserting that the 'master race' was not bound by the borders or sovereignty of 'lesser' neutral states. Ultimately, the victory at Sedan was used by Nazi propaganda to validate the 'Führerprinzip' by suggesting that the singular, uncompromising will of Adolf Hitler had triumphed over the supposedly decadent and divided political systems of the French Third Republic.",
+    citation: "(Fall of France in World War 2: France Surrenders to Germany, n.d.) & (Nazism | Definition, Leaders, Ideology, Fascism, & History, 2026)",
+    img_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/France_1940-Plan_de_bataille.svg/1280px-France_1940-Plan_de_bataille.svg.png",
+    ev_caption: "Fig. 4. Eric Gaba (Sting)., (2008). France 1940 - Plan de bataille [Map]. Wikimedia Commons. https://commons.wikimedia.org/wiki/File:France_1940-Plan_de_bataille.svg"
+  },
+  {
+    level: 2,
+    emoji: "⚡",
+    text: "Which German military tactic contributed most directly to the rapid defeat of France in 1940?",
+    options: [
+      "Blitzkrieg — rapid Panzer breakthroughs and air support designed to shatter defences",
+      "Siege warfare — systematic bombardment of fortified cities to force surrender",
+      "Naval blockade — severing Atlantic supply routes to create economic exhaustion"
+    ],
+    correct: 0,
+    justification: "Blitzkrieg was the physical expression of Nazi ideological values: aggressive speed and contempt for passive defence. Germany’s combined-arms doctrine overwhelmed France’s static, Maginot-Line strategy. The campaign lasted only 46 days, creating catastrophic psychological paralysis and shattering French command structures.",
+    citation: "(Fall of France in World War 2: France Surrenders to Germany, n.d.) & (Nazism | Definition, Leaders, Ideology, Fascism, & History, 2026)",
+    img_url: "https://bild.bundesarchiv.de/device_barch/dev1/2024/04-19/94/43/file7v2dsilqfmo1abxdneim.jpg",
+    ev_caption: "Fig. 5. Borchert E., (1940). Frankreich, Panzer 35t und Panzer IV [Photograph]. Bundesarchiv. https://www.bild.bundesarchiv.de/dba/de/search/?query=Borchert+Erich"
+  },
+  {
+    level: 2,
+    emoji: "⚖️",
+    text: "Which measures imposed during the occupation reflected ideological unfairness towards civilians?",
+    options: [
+      "Anti-Jewish legislation, compulsory labour, food requisitioning, and suppression of rights",
+      "New educational curricula promoting democratic values and European exchange",
+      "Large-scale industrial investment programmes to modernise the French economy"
+    ],
+    correct: 0,
+    justification: "Nazi racial ideology was systematically imposed through anti-Jewish statutes that stripped citizens of rights and property. Food requisitioning impoverished the population while the Service du Travail Obligatoire (STO) conscripted over 650,000 workers. These measures embodied the denial of equal human dignity.",
+    citation: "(Fontaine, 2007) & (Boissoneault, 2017)",
+    img_url: "https://cdn.britannica.com/22/205622-050-BC257C58/Vichy-France-Germany-June-1940-armistice-map.jpg",
+    ev_caption: "Fig. 6. Encyclopaedia Britannica., (n.d.). Occupation of France, 1940–44 [Map]. Britannica. https://www.britannica.com/event/Vichy-France"
+  },
+  {
+    level: 2,
+    emoji: "📉",
+    text: "How did the invasion and occupation affect France's long-term development?",
+    options: [
+      "Economic extraction, destruction of institutions, and social divisions caused profound damage",
+      "France recovered fully within a decade with no significant long-term consequences",
+      "The occupation modernised industrial infrastructure, accelerating post-war recovery"
+    ],
+    correct: 0,
+    justification: "The invasion and occupation of France inflicted profound structural and psychological scars that fundamentally reshaped the nation's long term development. Economically, the occupation was a period of systemic exploitation where the German administration extracted massive quantities of resources, food, and labor, resulting in an estimated modern value of billions in lost assets and a severely crippled industrial base that required decades of post war reconstruction. Politically, the collapse of the Third Republic led to the installation of the Vichy regime under Marshal Philippe Pétain, which systematically dismantled democratic institutions and replaced the national motto of 'Liberté, Égalité, Fraternité' with the authoritarian 'Travail, Famille, Patrie.' This period saw France transform into a quasi police state that willingly participated in the Holocaust by deporting over 75,000 Jews, a legacy of collaboration that created deep moral and political fault lines in French society. Even after the liberation, the process of 'épuration légale' or legal purges aimed at collaborators further polarized the population, leading to a long term national struggle with identity and historical memory. The trauma of the occupation also influenced the transition to the Fourth and eventually the Fifth Republic, as leaders like Charles de Gaulle sought to restore national prestige through a more centralized executive power and an independent foreign policy designed to prevent such a vulnerability from ever occurring again.",
+    citation: "(Ray, 2026) & (Boissoneault, 2017)",
+    img_url: "https://upload.wikimedia.org/wikipedia/commons/6/66/Bundesarchiv_Bild_183-M1112-500%2C_Waffenstillstand_von_Compi%C3%A8gne%2C_Hitler%2C_G%C3%B6ring.jpg", 
+    ev_caption: "Fig. 7. Bundesarchiv., (1940). Waffenstillstand von Compiègne, Hitler, Göring [Photograph]. Wikipedia. https://de.wikipedia.org/wiki/Datei:Bundesarchiv_Bild_183-M1112-500,_Waffenstillstand_von_Compi%C3%A8gne,_Hitler,_G%C3%B6ring.jpg"
+  },
+  {
+    level: 2,
+    emoji: "🌐",
+    text: "How did the invasion of France disrupt European political cooperation in 1940?",
+    options: [
+      "It destroyed the League of Nations' collective security framework and failed diplomacy",
+      "It strengthened European cooperation by uniting neutral nations behind France",
+      "European cooperation was unaffected as existing treaties continued to function"
+    ],
+    correct: 0,
+    justification: "The fall of France in 1940 fundamentally shattered the existing framework of European political cooperation by exposing the total collapse of collective security as a viable deterrent against ideologically expansionist regimes. For much of the interwar period, the League of Nations was the centerpiece of international order, yet the rapid German conquest demonstrated that 'rationalist' diplomatic pacts were entirely incapable of restraining a state committed to the 'Führerprinzip' and military dominance. This disruption was not merely military but also institutional as the invasion forced a realignment where neutrality was no longer a safeguard, evidenced by the occupation of Belgium and the Netherlands. The failure of the Anglo-French alliance at the time of the invasion highlighted that without a unified, integrated military command and shared political sovereignty, cooperation was functionally impossible against a monolithic totalitarian threat. These harsh lessons directly informed the long term development of the post war world, shifting the focus from the weak advisory role of the League toward more robust, binding structures which eventually led to the creation of the United Nations with a Security Council and the formation of NATO to establish the principle of collective defense.",
+    citation: "(League of Nations | History, Definition & Purpose, 2026) & (Fall of France in World War 2: France Surrenders to Germany, n.d.)",
+    img_url: "https://cdnph.upi.com/svc/sv/upi_com/5431605412514/2020/1/5c4633cd8978615610244b38c99db5e7/On-This-Day-League-of-Nations-assembles-for-first-time.jpg",
+    ev_caption: "Fig. 8. United Nations., (1920). The official opening of the League of Nations [Photograph]. UPI. https://www.upi.com/Top_News/2020/11/15/On-This-Day-League-of-Nations-assembles-for-first-time/5431605412514/"
+  }
+];
+
+const LEVELS = {
+  1: {name:"Basic Understanding", icon:"🗺️", cls:"", desc:"Questions 1–4 test core facts: ideologies, failures of cooperation, resistance, and the military events of the 1940 invasion."},
+  2: {name:"Deep Analysis", icon:"🧠", cls:"l2", desc:"Questions 5–8 examine how ideology drove military tactics, occupation policies, and long-term developmental consequences."}
+};
+
+const ASK_DUR = 12;
+const REVEAL_DUR = 18;
+
+const PHASES = [];
+PHASES.push({type:'intro', dur:10});
+PHASES.push({type:'lvl', level:1, dur:3});
+for(let i=0;i<4;i++){
+  PHASES.push({type:'ask', qi:i, dur:ASK_DUR});
+  PHASES.push({type:'reveal', qi:i, dur:REVEAL_DUR});
+}
+PHASES.push({type:'lvl', level:2, dur:5});
+for(let i=4;i<8;i++){
+  PHASES.push({type:'ask', qi:i, dur:ASK_DUR});
+  PHASES.push({type:'reveal', qi:i, dur:REVEAL_DUR});
+}
+PHASES.push({type:'outro', dur:5});
+
+const TOTAL_DURATION = PHASES.reduce((acc, p) => acc + p.dur, 0);
+
+let phaseTimer = null;
+let tickTimer = null;
+let globalElapsed = 0;
+let phaseElapsed = 0;
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function updateGlobalBar(){
+  const pct = Math.min(100, (globalElapsed / TOTAL_DURATION)*100);
+  document.getElementById('gbar').style.width = pct + '%';
+}
+
+function runPhase(idx){
+  if(idx >= PHASES.length) return;
+  const phase = PHASES[idx];
+  phaseElapsed = 0;
+  clearInterval(tickTimer);
+  clearTimeout(phaseTimer);
+  
+  enterPhase(phase);
+  
+  tickTimer = setInterval(()=>{
+    phaseElapsed++;
+    globalElapsed++;
+    updateGlobalBar();
+    onPhaseTick(phase, phaseElapsed);
+  }, 1000);
+
+  phaseTimer = setTimeout(()=>{
+    clearInterval(tickTimer);
+    runPhase(idx+1);
+  }, phase.dur * 1000);
+}
+
+function enterPhase(phase){
+  if(phase.type === 'intro') show('intro-screen');
+  else if(phase.type === 'lvl'){
+    const lv = LEVELS[phase.level];
+    document.getElementById('lvl-badge').textContent = `Level ${phase.level}`;
+    document.getElementById('lvl-badge').className = `lbadge-big ${lv.cls}`;
+    document.getElementById('lvl-icon').textContent = lv.icon;
+    document.getElementById('lvl-title').textContent = lv.name;
+    document.getElementById('lvl-desc').textContent = lv.desc;
+    show('lvl-screen');
+  }
+  else if(phase.type === 'ask'){
+    const q = QUESTIONS[phase.qi];
+    const lv = LEVELS[q.level];
+    const qNumDisplay = phase.qi < 4 ? phase.qi+1 : phase.qi-3;
+    document.getElementById('q-badge').textContent = `Level ${q.level} · ${lv.name}`;
+    document.getElementById('q-badge').className = `q-lvl-badge ${lv.cls||''}`;
+    document.getElementById('q-num').textContent = `Question ${qNumDisplay} / 4`;
+    document.getElementById('qbge').textContent = q.emoji;
+    document.getElementById('qnl').textContent = `Question ${phase.qi+1}`;
+    document.getElementById('qtext').textContent = q.text;
+    const ag = document.getElementById('ag');
+    ag.innerHTML = '';
+    ['A','B','C'].forEach((lt,i)=>{
+      const b = document.createElement('div');
+      b.className = 'ab';
+      b.id = `opt-${i}`;
+      b.innerHTML = `<span class="al">${lt}</span><span>${q.options[i]}</span>`;
+      ag.appendChild(b);
+    });
+    document.getElementById('ask-phase').style.display='flex';
+    document.getElementById('reveal-phase').style.display='none';
+    updateQTimer(ASK_DUR, ASK_DUR);
+    show('q-screen');
+  }
+  else if(phase.type === 'reveal'){
+    const q = QUESTIONS[phase.qi];
+    ['A','B','C'].forEach((_,i)=>{
+      const el = document.getElementById(`opt-${i}`);
+      if(el){
+        if(i === q.correct) el.classList.add('ok');
+        else el.classList.add('ng');
+      }
+    });
+    document.getElementById('ans-text').textContent = q.options[q.correct];
+    document.getElementById('jtext').textContent = q.justification;
+    document.getElementById('citation').textContent = q.citation;
+    
+    const imgEl = document.getElementById('q-img');
+    imgEl.src = q.img_url || "https://via.placeholder.com/800x500/080806/d4b94a?text=Archive+Image+Not+Linked";
+    document.getElementById('ev-caption').textContent = q.ev_caption;
+
+    document.getElementById('ask-phase').style.display='none';
+    const rp = document.getElementById('reveal-phase');
+    rp.style.display='flex';
+    rp.classList.add('active');
+    updateQTimer(REVEAL_DUR, REVEAL_DUR);
+  }
+  else if(phase.type === 'outro') show('outro-screen');
+}
+
+function onPhaseTick(phase, elapsed){
+  if(phase.type === 'ask') updateQTimer(ASK_DUR - elapsed, ASK_DUR);
+  else if(phase.type === 'reveal') updateQTimer(REVEAL_DUR - elapsed, REVEAL_DUR);
+}
+
+function updateQTimer(remaining, total){
+  const pct = Math.max(0, (remaining/total)*100);
+  const bar = document.getElementById('tbar');
+  const num = document.getElementById('tnum');
+  bar.style.width = pct + '%';
+  bar.className = 'tbf' + (remaining <= 5 ? ' warn' : '');
+  num.textContent = Math.max(0, remaining);
+  num.className = 'tnum' + (remaining <= 5 ? ' warn' : '');
+}
+
+window.addEventListener('load', () => {
+  setTimeout(() => runPhase(0), 500);
+});
+</script>
+</body>
+</html>
