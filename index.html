@@ -210,6 +210,10 @@ h1.mt{font-family:'Oswald',sans-serif;font-size:clamp(36px,5.5vw,74px);font-weig
 </style>
 </head>
 <body>
+  <audio id="bg-music" loop preload="auto">
+  <source src="music.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
 <div class="co ctl"></div><div class="co ctr"></div><div class="co cbl"></div><div class="co cbr"></div>
 <div id="gbar" style="width:0%"></div>
 <div id="wrap">
@@ -591,7 +595,34 @@ function updateQTimer(remaining, total){
 
 window.addEventListener('load', () => {
   setTimeout(() => runPhase(0), 500);
-});
+})
+/* ═══════════════════════════════════════════
+    AUDIO LOGIC — Фоновая музыка
+   ═══════════════════════════════════════════ */
+function initBackgroundMusic() {
+  const music = document.getElementById('bg-music');
+  
+  // Громкость 15% (чтобы не заглушала мысли)
+  music.volume = 0.15; 
+
+  // Функция запуска
+  const startAudio = () => {
+    music.play().catch(err => {
+      console.log("Автозапуск заблокирован браузером. Музыка включится после клика.");
+    });
+    // Удаляем слушатели после первого срабатывания
+    document.removeEventListener('click', startAudio);
+    document.removeEventListener('keydown', startAudio);
+  };
+
+  // Слушаем первый клик или нажатие клавиши пользователя
+  document.addEventListener('click', startAudio);
+  document.addEventListener('keydown', startAudio);
+}
+
+// Вызываем инициализацию сразу
+initBackgroundMusic();
+;
 </script>
 </body>
 </html>
