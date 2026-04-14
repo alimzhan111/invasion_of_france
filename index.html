@@ -128,7 +128,6 @@ h1.mt{font-family:'Oswald',sans-serif;font-size:clamp(36px,5.5vw,74px);font-weig
   width: 100%;
   height: 100%;
   object-fit: cover; 
-  
   display: block;
 }
 .photo-footer {
@@ -145,29 +144,23 @@ h1.mt{font-family:'Oswald',sans-serif;font-size:clamp(36px,5.5vw,74px);font-weig
 }
 
 /* ── OUTRO ── */
-#outro-screen{gap:18px;}
-.outro-medal{font-size:92px;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;animation:flt 3s ease-in-out infinite;filter:drop-shadow(0 0 25px rgba(212,185,74,0.5));}
-.outro-title{font-family:'Oswald',sans-serif;font-size:clamp(24px,4vw,48px);font-weight:700;text-transform:uppercase;letter-spacing:4px;color:var(--khaki);}
-.outro-sources{background:rgba(42,58,26,0.4);border:1px solid var(--kd);padding:20px 30px;max-width:800px;text-align:left;}
-.outro-sources h3{font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--khaki);margin-bottom:12px;}
-.outro-sources ol{padding-left:22px;font-family:'Lora',serif;font-size:12px;line-height:2.1;color:var(--pb);}
-/* Обновленные стили для финального экрана */
 #outro-screen {
     padding: 40px 60px;
-    justify-content: flex-start; /* Чтобы текст шел сверху вниз */
-    overflow-y: auto; /* На случай, если текста будет много */
+    justify-content: flex-start;
+    overflow-y: auto;
 }
+.outro-medal{font-size:92px;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;animation:flt 3s ease-in-out infinite;filter:drop-shadow(0 0 25px rgba(212,185,74,0.5));}
+.outro-title{font-family:'Oswald',sans-serif;font-size:clamp(24px,4vw,48px);font-weight:700;text-transform:uppercase;letter-spacing:4px;color:var(--khaki);}
 
 .outro-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Две колонки пополам */
+    grid-template-columns: 1fr 1fr;
     gap: 40px;
     width: 100%;
     max-width: 1200px;
     text-align: left;
     margin-top: 20px;
 }
-
 .outro-column h3 {
     font-family: 'Oswald', sans-serif;
     font-size: 14px;
@@ -178,42 +171,25 @@ h1.mt{font-family:'Oswald',sans-serif;font-size:clamp(36px,5.5vw,74px);font-weig
     padding-bottom: 8px;
     margin-bottom: 15px;
 }
-
-/* Стиль APA с висячим отступом */
-.apa-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
+.apa-list { list-style: none; padding: 0; margin: 0; }
 .apa-item {
     font-family: 'Lora', serif;
     font-size: 11px;
     line-height: 1.6;
     color: var(--pb);
     margin-bottom: 12px;
-    padding-left: 30px; /* Отступ для всех строк */
-    text-indent: -30px; /* Возврат первой строки назад */
+    padding-left: 30px;
+    text-indent: -30px;
 }
-
-/* Ищи этот фрагмент в CSS и замени его */
-.apa-item em {
-    font-style: italic; /* Это делает текст курсивом */
-    color: inherit;     /* Это заставит текст использовать тот же цвет, что и у остальной строки */
-}
-
-.apa-item a {
-    color: var(--st);
-    text-decoration: none;
-    word-break: break-all;
-}
+.apa-item em { font-style: italic; color: inherit; }
 </style>
 </head>
 <body>
-  <audio id="bg-music" loop preload="auto">
+
+<audio id="bg-music" loop preload="auto">
   <source src="music.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
 </audio>
+
 <div class="co ctl"></div><div class="co ctr"></div><div class="co cbl"></div><div class="co cbr"></div>
 <div id="gbar" style="width:0%"></div>
 <div id="wrap">
@@ -229,14 +205,14 @@ h1.mt{font-family:'Oswald',sans-serif;font-size:clamp(36px,5.5vw,74px);font-weig
       How did the German invasion of France in 1940 demonstrate the impact of conflicting ideologies on political cooperation in Europe?
     </div>
     <div class="rules">
-      <b>Rules:</b> Each question is displayed for <b>12 seconds</b>.<br>
+      <b>Rules:</b> Each question is displayed for <b>8 seconds</b>.<br>
       Read the question carefully, then state your answer aloud.<br>
-      After 12 seconds, the correct answer is revealed with historical evidence for <b>18 seconds</b>.
+      After 8 seconds, the correct answer is revealed with historical evidence for <b>14 seconds</b>.
     </div>
     <div class="dv"></div>
     <div class="credits">
       Shayakhmetova Madiya &nbsp;·&nbsp; Khamitova Azel &nbsp;·&nbsp; Kassimov Alimzhan<br>
-      Grade 10F · World History · Nazarbayev Intellectual School of Astana · 2025–2026
+      Grade 10F · World History · Nazarbayev Intellectual School in Astana · 2025–2026
     </div>
   </div>
 
@@ -255,7 +231,7 @@ h1.mt{font-family:'Oswald',sans-serif;font-size:clamp(36px,5.5vw,74px);font-weig
     <div class="trow">
       <span class="tlabel">TIME</span>
       <div class="tbb"><div class="tbf" id="tbar" style="width:100%"></div></div>
-      <span class="tnum" id="tnum">12</span>
+      <span class="tnum" id="tnum">8</span>
     </div>
     <div id="ask-phase" style="width:100%;display:flex;flex-direction:column;gap:10px;">
       <div class="qcard">
@@ -293,7 +269,6 @@ h1.mt{font-family:'Oswald',sans-serif;font-size:clamp(36px,5.5vw,74px);font-weig
     <div class="outro-medal">🏆</div>
     <div class="outro-title">Investigation Complete</div>
     <div class="dv" style="width:100%; max-width:1200px;"></div>
-
     <div class="outro-grid">
         <div class="outro-column">
             <h3>Reference List</h3>
@@ -308,157 +283,104 @@ h1.mt{font-family:'Oswald',sans-serif;font-size:clamp(36px,5.5vw,74px);font-weig
                 <div class="apa-item">Ray, M. (2026, March 2). <em>Vichy France | History, Leaders, & Map.</em> Britannica. https://www.britannica.com/event/Vichy-France</div>
             </div>
         </div>
-
         <div class="outro-column">
             <h3>List of Figures</h3>
             <div class="apa-list">
-                <div class="apa-item">Fig. 1. San Jose., (2006). <em>Second world war europe 1940 map pl2</em> [Map]. Wikimedia Commons. https://commons.wikimedia.org/wiki/File:Second_world_war_europe_1940_map_pl2.png</div>
-                <div class="apa-item">Fig. 2. Malindine (Capt)., (1940). <em>The British Army in France 1940</em> [Photograph]. Imperial War Museums. https://www.iwm.org.uk/collections/item/object/8753</div>
-                <div class="apa-item">Fig. 3. Library of Congress., (1942). <em>Charles de Gaulle shown in 1942</em> [Photograph]. Defense Media Network. https://www.defensemedianetwork.com/stories/the-power-of-wont-charles-de-gaulle-and-the-free-french/</div>
-                <div class="apa-item">Fig. 4. Eric Gaba (Sting)., (2008). <em>France 1940 - Plan de bataille</em> [Map]. Wikimedia Commons. https://commons.wikimedia.org/wiki/File:France_1940-Plan_de_bataille.svg</div>
-                <div class="apa-item">Fig. 5. Borchert E., (1940). <em>Frankreich, Panzer 35t und Panzer IV</em> [Photograph]. Bundesarchiv. https://www.bild.bundesarchiv.de/dba/de/search/?query=Borchert+Erich</div>
-                <div class="apa-item">Fig. 6. Encyclopaedia Britannica., (n.d.). <em>Occupation of France, 1940–44</em> [Map]. Britannica. https://www.britannica.com/event/Vichy-France</div>
-                <div class="apa-item">Fig. 7. Bundesarchiv., (1940). <em>Waffenstillstand von Compiègne, Hitler, Göring</em> [Photograph]. Wikipedia. https://de.wikipedia.org/wiki/Datei:Bundesarchiv_Bild_183-M1112-500,_Waffenstillstand_von_Compi%C3%A8gne,_Hitler,_G%C3%B6ring.jpg</div>
-                <div class="apa-item">Fig. 8. United Nations., (1920). <em>The official opening of the League of Nations</em> [Photograph]. UPI. https://www.upi.com/Top_News/2020/11/15/On-This-Day-League-of-Nations-assembles-for-first-time/5431605412514/</div>
+                <div class="apa-item">Fig. 1. San Jose., (2006). <em>Second world war europe 1940 map pl2</em> [Map]. Wikimedia Commons.</div>
+                <div class="apa-item">Fig. 2. Malindine (Capt)., (1940). <em>The British Army in France 1940</em> [Photograph]. Imperial War Museums.</div>
+                <div class="apa-item">Fig. 3. Library of Congress., (1942). <em>Charles de Gaulle shown in 1942</em> [Photograph]. Defense Media Network.</div>
+                <div class="apa-item">Fig. 4. Eric Gaba (Sting)., (2008). <em>France 1940 - Plan de bataille</em> [Map]. Wikimedia Commons.</div>
+                <div class="apa-item">Fig. 5. Borchert E., (1940). <em>Frankreich, Panzer 35t und Panzer IV</em> [Photograph]. Bundesarchiv.</div>
+                <div class="apa-item">Fig. 6. Encyclopaedia Britannica., (n.d.). <em>Occupation of France, 1940–44</em> [Map]. Britannica.</div>
+                <div class="apa-item">Fig. 7. Bundesarchiv., (1940). <em>Waffenstillstand von Compiègne</em> [Photograph]. Wikipedia.</div>
+                <div class="apa-item">Fig. 8. United Nations., (1920). <em>The official opening of the League of Nations</em> [Photograph]. UPI.</div>
             </div>
         </div>
     </div>
-
-    <div class="credits" style="margin-top:30px; width:100%; border-top: 1px dashed var(--kd); padding-top: 15px;">
-        Shayakhmetova Madiya · Khamitova Azel · Kassimov Alimzhan<br>
-        Grade 10F · World History · Nazarbayev Intellectual School in Astana · 2025–2026
-    </div>
-</div>
+  </div>
 
 </div>
 
 <script>
+// Твои данные вопросов
 const QUESTIONS = [
   {
-    level: 1,
-    emoji: "🏛️",
-    text: "What political ideologies influenced France and Germany before the invasion of 1940?",
-    options: [
-      "France: Liberal Democracy; Germany: National Socialism (Nazism)",
-      "France: Fascism; Germany: Communism",
-      "France: Monarchism; Germany: Liberal Democracy"
-    ],
+    level: 1, emoji: "🏛️", text: "What political ideologies influenced France and Germany before the invasion of 1940?",
+    options: ["France: Liberal Democracy; Germany: National Socialism (Nazism)", "France: Fascism; Germany: Communism", "France: Monarchism; Germany: Liberal Democracy"],
     correct: 0,
-    justification: "France functioned as a parliamentary liberal democracy upholding elected government and civil liberties. Nazi Germany was governed by National Socialism, a totalitarian ideology rooted in racial supremacy and extreme nationalism. These fundamentally opposed systems made genuine political cooperation structurally impossible, creating the ideological precondition for the 1940 conflict.",
+    justification: "France functioned as a parliamentary liberal democracy upholding elected government and civil liberties. Nazi Germany was governed by National Socialism, a totalitarian ideology rooted in racial supremacy and extreme nationalism.",
     citation: "(Nazism | Definition, Leaders, Ideology, Fascism, & History, 2026)",
     img_url: "https://upload.wikimedia.org/wikipedia/commons/e/e4/Second_world_war_europe_1940_map_pl2.png",
-    ev_caption: "Fig. 1. San Jose., (2006). Second world war europe 1940 map pl2 [Map]. Wikimedia Commons. https://commons.wikimedia.org/wiki/File:Second_world_war_europe_1940_map_pl2.png"
+    ev_caption: "Fig. 1. Europe 1940 map showing political divisions."
   },
   {
-    level: 1,
-    emoji: "🤝",
-    text: "Which countries failed to cooperate with France effectively during the German invasion in 1940?",
-    options: [
-      "The United Kingdom and Belgium — Britain prioritised Dunkirk; Belgium surrendered without consultation",
-      "The United States and the Soviet Union — both remained neutral in Western Europe",
-      "Poland and Czechoslovakia — both had already been occupied by Germany"
-    ],
+    level: 1, emoji: "🤝", text: "Which countries failed to cooperate with France effectively during the German invasion in 1940?",
+    options: ["The United Kingdom and Belgium — Britain prioritised Dunkirk; Belgium surrendered without consultation", "The United States and the Soviet Union", "Poland and Czechoslovakia"],
     correct: 0,
-    justification: "The Dunkirk evacuation (Operation Dynamo) rescued over 338,000 soldiers, however the decision exposed deep strategic divergence as Britain prioritised its own forces, leaving French units to hold the perimeter. Belgium's unilateral surrender on 28 May opened a critical gap in the Allied line, fracturing cohesion at a decisive moment.",
-    citation: "(Dunkirk Evacuation | Facts, Map, Photos, Numbers, Timeline, & Summary, 2026)",
-    img_url: "https://media.iwm.org.uk/ciim5/285/85/large_000000.jpg", 
-    ev_caption: "Fig. 2. Malindine (Capt)., (1940). The British Army in France 1940 [Photograph]. Imperial War Museums. https://www.iwm.org.uk/collections/item/object/8753"
+    justification: "The Dunkirk evacuation rescued over 338,000 soldiers, however the decision exposed deep strategic divergence as Britain prioritised its own forces. Belgium's unilateral surrender on 28 May opened a critical gap.",
+    citation: "(Dunkirk Evacuation, 2026)",
+    img_url: "https://media.iwm.org.uk/ciim5/285/85/large_000000.jpg",
+    ev_caption: "Fig. 2. The British Army in France 1940."
   },
   {
-    level: 1,
-    emoji: "✊",
-    text: "Which countries refused to cooperate with Germany during and after the invasion of France in 1940?",
-    options: [
-      "The United Kingdom and Free France under General de Gaulle — both continued armed resistance",
-      "The Soviet Union and the United States — both declared war following the fall of Paris",
-      "Spain and Portugal — both mobilised their armies against Germany"
-    ],
+    level: 1, emoji: "✊", text: "Which countries refused to cooperate with Germany during and after the invasion of France in 1940?",
+    options: ["The United Kingdom and Free France under General de Gaulle", "The Soviet Union and the United States", "Spain and Portugal"],
     correct: 0,
-    justification: "Churchill's Britain categorically rejected all German peace overtures, committing to resistance rooted in democratic values. General Charles de Gaulle's Free France movement became the ideological antithesis of Vichy collaboration. This defiance demonstrated that shared democratic ideology could sustain resistance even after military defeat.",
+    justification: "Churchill's Britain categorically rejected all German peace overtures. General Charles de Gaulle's Free France movement became the ideological antithesis of Vichy collaboration.",
     citation: "(Spencer, 2023)",
     img_url: "https://i0.wp.com/www.defensemedianetwork.com/wp-content/uploads/2011/09/De_Gaulle-OWI-1942.jpg?ssl=1",
-    ev_caption: "Fig. 3. Library of Congress., (1942). Charles de Gaulle shown in 1942 [Photograph]. Defense Media Network. https://www.defensemedianetwork.com/stories/the-power-of-wont-charles-de-gaulle-and-the-free-french/"
+    ev_caption: "Fig. 3. General Charles de Gaulle, leader of the Free French."
   },
   {
-    level: 1,
-    emoji: "⚔️",
-    text: "How did the German attack on Sedan in May 1940 demonstrate Nazi ideological priorities?",
-    options: [
-      "Germany violated neutral borders without declaration and rejected all diplomatic norms",
-      "Germany obtained permission from the League of Nations before crossing borders",
-      "Germany negotiated a formal transit agreement with Belgium and Luxembourg"
-    ],
+    level: 1, emoji: "⚔️", text: "How did the German attack on Sedan in May 1940 demonstrate Nazi ideological priorities?",
+    options: ["Germany violated neutral borders without declaration and rejected all diplomatic norms", "Germany obtained permission from the League of Nations", "Germany negotiated a formal transit agreement"],
     correct: 0,
-    justification: "The German breakthrough at Sedan in May 1940 served as a practical application of National Socialist ideology where the 'will to power' and the cult of offensive action took precedence over established international norms. This operation demonstrated a profound contempt for the 'rationalist' legal frameworks of the West as Germany bypassed diplomatic declarations to launch a high speed 'Blitzkrieg' through neutral Belgium, Luxembourg, and the Netherlands. By utilizing the Ardennes forest, a route considered impassable by French 'intellectual' military logic, the Nazi leadership aimed to prove the superiority of the 'Aryan' soldier's intuition and daring over the static, defensive mentality of parliamentary democracies. The attack was not merely a strategic maneuver however a manifestation of the 'Lebensraum' doctrine, asserting that the 'master race' was not bound by the borders or sovereignty of 'lesser' neutral states. Ultimately, the victory at Sedan was used by Nazi propaganda to validate the 'Führerprinzip' by suggesting that the singular, uncompromising will of Adolf Hitler had triumphed over the supposedly decadent and divided political systems of the French Third Republic.",
-    citation: "(Fall of France in World War 2: France Surrenders to Germany, n.d.) & (Nazism | Definition, Leaders, Ideology, Fascism, & History, 2026)",
+    justification: "The German breakthrough at Sedan served as a practical application of National Socialist ideology where the 'will to power' took precedence over international norms. Germany bypassed diplomatic declarations to launch a Blitzkrieg through neutral nations.",
+    citation: "(Fall of France, n.d.)",
     img_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/France_1940-Plan_de_bataille.svg/1280px-France_1940-Plan_de_bataille.svg.png",
-    ev_caption: "Fig. 4. Eric Gaba (Sting)., (2008). France 1940 - Plan de bataille [Map]. Wikimedia Commons. https://commons.wikimedia.org/wiki/File:France_1940-Plan_de_bataille.svg"
+    ev_caption: "Fig. 4. Strategic map of the Battle of France."
   },
   {
-    level: 2,
-    emoji: "⚡",
-    text: "Which German military tactic contributed most directly to the rapid defeat of France in 1940?",
-    options: [
-      "Blitzkrieg — rapid Panzer breakthroughs and air support designed to shatter defences",
-      "Siege warfare — systematic bombardment of fortified cities to force surrender",
-      "Naval blockade — severing Atlantic supply routes to create economic exhaustion"
-    ],
+    level: 2, emoji: "⚡", text: "Which German military tactic contributed most directly to the rapid defeat of France in 1940?",
+    options: ["Blitzkrieg — rapid Panzer breakthroughs and air support", "Siege warfare", "Naval blockade"],
     correct: 0,
-    justification: "Blitzkrieg was the physical expression of Nazi ideological values: aggressive speed and contempt for passive defence. Germany’s combined-arms doctrine overwhelmed France’s static, Maginot-Line strategy. The campaign lasted only 46 days, creating catastrophic psychological paralysis and shattering French command structures.",
-    citation: "(Fall of France in World War 2: France Surrenders to Germany, n.d.) & (Nazism | Definition, Leaders, Ideology, Fascism, & History, 2026)",
+    justification: "Blitzkrieg was the physical expression of Nazi ideological values: aggressive speed. Germany’s combined-arms doctrine overwhelmed France’s static Maginot-Line strategy.",
+    citation: "(Fall of France, n.d.)",
     img_url: "https://bild.bundesarchiv.de/device_barch/dev1/2024/04-19/94/43/file7v2dsilqfmo1abxdneim.jpg",
-    ev_caption: "Fig. 5. Borchert E., (1940). Frankreich, Panzer 35t und Panzer IV [Photograph]. Bundesarchiv. https://www.bild.bundesarchiv.de/dba/de/search/?query=Borchert+Erich"
+    ev_caption: "Fig. 5. German Panzer units advancing in France."
   },
   {
-    level: 2,
-    emoji: "⚖️",
-    text: "Which measures imposed during the occupation reflected ideological unfairness towards civilians?",
-    options: [
-      "Anti-Jewish legislation, compulsory labour, food requisitioning, and suppression of rights",
-      "New educational curricula promoting democratic values and European exchange",
-      "Large-scale industrial investment programmes to modernise the French economy"
-    ],
+    level: 2, emoji: "⚖️", text: "Which measures imposed during the occupation reflected ideological unfairness towards civilians?",
+    options: ["Anti-Jewish legislation, compulsory labour, and suppression of rights", "New educational curricula", "Large-scale industrial investment"],
     correct: 0,
-    justification: "Nazi racial ideology was systematically imposed through anti-Jewish statutes that stripped citizens of rights and property. Food requisitioning impoverished the population while the Service du Travail Obligatoire (STO) conscripted over 650,000 workers. These measures embodied the denial of equal human dignity.",
-    citation: "(Fontaine, 2007) & (Boissoneault, 2017)",
+    justification: "Nazi racial ideology was systematically imposed through anti-Jewish statutes. Food requisitioning impoverished the population while the STO conscripted over 650,000 workers.",
+    citation: "(Fontaine, 2007)",
     img_url: "https://cdn.britannica.com/22/205622-050-BC257C58/Vichy-France-Germany-June-1940-armistice-map.jpg",
-    ev_caption: "Fig. 6. Encyclopaedia Britannica., (n.d.). Occupation of France, 1940–44 [Map]. Britannica. https://www.britannica.com/event/Vichy-France"
+    ev_caption: "Fig. 6. Map of occupied and Vichy France."
   },
   {
-    level: 2,
-    emoji: "📉",
-    text: "How did the invasion and occupation affect France's long-term development?",
-    options: [
-      "Economic extraction, destruction of institutions, and social divisions caused profound damage",
-      "France recovered fully within a decade with no significant long-term consequences",
-      "The occupation modernised industrial infrastructure, accelerating post-war recovery"
-    ],
+    level: 2, emoji: "📉", text: "How did the invasion and occupation affect France's long-term development?",
+    options: ["Economic extraction, destruction of institutions, and social divisions caused profound damage", "France recovered fully within a decade", "The occupation modernised industrial infrastructure"],
     correct: 0,
-    justification: "The invasion and occupation of France inflicted profound structural and psychological scars that fundamentally reshaped the nation's long term development. Economically, the occupation was a period of systemic exploitation where the German administration extracted massive quantities of resources, food, and labor, resulting in an estimated modern value of billions in lost assets and a severely crippled industrial base that required decades of post war reconstruction. Politically, the collapse of the Third Republic led to the installation of the Vichy regime under Marshal Philippe Pétain, which systematically dismantled democratic institutions and replaced the national motto of 'Liberté, Égalité, Fraternité' with the authoritarian 'Travail, Famille, Patrie.' This period saw France transform into a quasi police state that willingly participated in the Holocaust by deporting over 75,000 Jews, a legacy of collaboration that created deep moral and political fault lines in French society. Even after the liberation, the process of 'épuration légale' or legal purges aimed at collaborators further polarized the population, leading to a long term national struggle with identity and historical memory. The trauma of the occupation also influenced the transition to the Fourth and eventually the Fifth Republic, as leaders like Charles de Gaulle sought to restore national prestige through a more centralized executive power and an independent foreign policy designed to prevent such a vulnerability from ever occurring again.",
-    citation: "(Ray, 2026) & (Boissoneault, 2017)",
-    img_url: "https://upload.wikimedia.org/wikipedia/commons/6/66/Bundesarchiv_Bild_183-M1112-500%2C_Waffenstillstand_von_Compi%C3%A8gne%2C_Hitler%2C_G%C3%B6ring.jpg", 
-    ev_caption: "Fig. 7. Bundesarchiv., (1940). Waffenstillstand von Compiègne, Hitler, Göring [Photograph]. Wikipedia. https://de.wikipedia.org/wiki/Datei:Bundesarchiv_Bild_183-M1112-500,_Waffenstillstand_von_Compi%C3%A8gne,_Hitler,_G%C3%B6ring.jpg"
+    justification: "The invasion inflicted profound structural scars. Politically, the collapse of the Third Republic led to the installation of the Vichy regime, which dismantled democratic institutions.",
+    citation: "(Ray, 2026)",
+    img_url: "https://upload.wikimedia.org/wikipedia/commons/6/66/Bundesarchiv_Bild_183-M1112-500%2C_Waffenstillstand_von_Compi%C3%A8gne%2C_Hitler%2C_G%C3%B6ring.jpg",
+    ev_caption: "Fig. 7. Armistice ceremony at Compiègne."
   },
   {
-    level: 2,
-    emoji: "🌐",
-    text: "How did the invasion of France disrupt European political cooperation in 1940?",
-    options: [
-      "It destroyed the League of Nations' collective security framework and failed diplomacy",
-      "It strengthened European cooperation by uniting neutral nations behind France",
-      "European cooperation was unaffected as existing treaties continued to function"
-    ],
+    level: 2, emoji: "🌐", text: "How did the invasion of France disrupt European political cooperation in 1940?",
+    options: ["It destroyed the League of Nations' collective security framework and failed diplomacy", "It strengthened European cooperation", "European cooperation was unaffected"],
     correct: 0,
-    justification: "The fall of France in 1940 fundamentally shattered the existing framework of European political cooperation by exposing the total collapse of collective security as a viable deterrent against ideologically expansionist regimes. For much of the interwar period, the League of Nations was the centerpiece of international order, yet the rapid German conquest demonstrated that 'rationalist' diplomatic pacts were entirely incapable of restraining a state committed to the 'Führerprinzip' and military dominance. This disruption was not merely military however also institutional as the invasion forced a realignment where neutrality was no longer a safeguard, evidenced by the occupation of Belgium and the Netherlands. The failure of the Anglo-French alliance at the time of the invasion highlighted that without a unified, integrated military command and shared political sovereignty, cooperation was functionally impossible against a monolithic totalitarian threat. These harsh lessons directly informed the long term development of the post war world, shifting the focus from the weak advisory role of the League toward more robust, binding structures which eventually led to the creation of the United Nations with a Security Council and the formation of NATO to establish the principle of collective defense.",
-    citation: "(League of Nations | History, Definition & Purpose, 2026) & (Fall of France in World War 2: France Surrenders to Germany, n.d.)",
+    justification: "The fall of France fundamentally shattered the existing framework of European political cooperation by exposing the total collapse of collective security against totalitarianism.",
+    citation: "(League of Nations, 2026)",
     img_url: "https://cdnph.upi.com/svc/sv/upi_com/5431605412514/2020/1/5c4633cd8978615610244b38c99db5e7/On-This-Day-League-of-Nations-assembles-for-first-time.jpg",
-    ev_caption: "Fig. 8. United Nations., (1920). The official opening of the League of Nations [Photograph]. UPI. https://www.upi.com/Top_News/2020/11/15/On-This-Day-League-of-Nations-assembles-for-first-time/5431605412514/"
+    ev_caption: "Fig. 8. The League of Nations in Geneva."
   }
 ];
 
 const LEVELS = {
-  1: {name:"Basic Understanding", icon:"🗺️", cls:"", desc:"Questions 1–4 test core facts: ideologies, failures of cooperation, resistance, and the military events of the 1940 invasion."},
-  2: {name:"Deep Analysis", icon:"🧠", cls:"l2", desc:"Questions 5–8 examine how ideology drove military tactics, occupation policies, and long-term developmental consequences."}
+  1: {name:"Basic Understanding", icon:"🗺️", cls:"", desc:"Questions 1–4 test core facts: ideologies, failures of cooperation, and military events."},
+  2: {name:"Deep Analysis", icon:"🧠", cls:"l2", desc:"Questions 5–8 examine tactics, occupation, and long-term consequences."}
 };
 
 const ASK_DUR = 8;
@@ -480,10 +402,10 @@ PHASES.push({type:'outro', dur:5});
 
 const TOTAL_DURATION = PHASES.reduce((acc, p) => acc + p.dur, 0);
 
-let phaseTimer = null;
-let tickTimer = null;
 let globalElapsed = 0;
 let phaseElapsed = 0;
+let tickTimer = null;
+let phaseTimer = null;
 
 function show(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
@@ -512,7 +434,6 @@ function runPhase(idx){
   }, 1000);
 
   phaseTimer = setTimeout(()=>{
-    clearInterval(tickTimer);
     runPhase(idx+1);
   }, phase.dur * 1000);
 }
@@ -542,8 +463,7 @@ function enterPhase(phase){
     ag.innerHTML = '';
     ['A','B','C'].forEach((lt,i)=>{
       const b = document.createElement('div');
-      b.className = 'ab';
-      b.id = `opt-${i}`;
+      b.className = 'ab'; b.id = `opt-${i}`;
       b.innerHTML = `<span class="al">${lt}</span><span>${q.options[i]}</span>`;
       ag.appendChild(b);
     });
@@ -556,23 +476,16 @@ function enterPhase(phase){
     const q = QUESTIONS[phase.qi];
     ['A','B','C'].forEach((_,i)=>{
       const el = document.getElementById(`opt-${i}`);
-      if(el){
-        if(i === q.correct) el.classList.add('ok');
-        else el.classList.add('ng');
-      }
+      if(el && i === q.correct) el.classList.add('ok');
+      else if(el) el.classList.add('ng');
     });
     document.getElementById('ans-text').textContent = q.options[q.correct];
     document.getElementById('jtext').textContent = q.justification;
     document.getElementById('citation').textContent = q.citation;
-    
-    const imgEl = document.getElementById('q-img');
-    imgEl.src = q.img_url || "https://via.placeholder.com/800x500/080806/d4b94a?text=Archive+Image+Not+Linked";
+    document.getElementById('q-img').src = q.img_url;
     document.getElementById('ev-caption').textContent = q.ev_caption;
-
     document.getElementById('ask-phase').style.display='none';
-    const rp = document.getElementById('reveal-phase');
-    rp.style.display='flex';
-    rp.classList.add('active');
+    document.getElementById('reveal-phase').style.display='flex';
     updateQTimer(REVEAL_DUR, REVEAL_DUR);
   }
   else if(phase.type === 'outro') show('outro-screen');
@@ -587,42 +500,25 @@ function updateQTimer(remaining, total){
   const pct = Math.max(0, (remaining/total)*100);
   const bar = document.getElementById('tbar');
   const num = document.getElementById('tnum');
-  bar.style.width = pct + '%';
-  bar.className = 'tbf' + (remaining <= 5 ? ' warn' : '');
-  num.textContent = Math.max(0, remaining);
-  num.className = 'tnum' + (remaining <= 5 ? ' warn' : '');
+  if(bar) bar.style.width = pct + '%';
+  if(num) num.textContent = Math.max(0, remaining);
+}
+
+// AUDIO ENGINE
+function initAudio() {
+    const music = document.getElementById('bg-music');
+    music.volume = 0.2;
+    const startAudio = () => {
+        music.play();
+        document.removeEventListener('click', startAudio);
+    };
+    document.addEventListener('click', startAudio);
 }
 
 window.addEventListener('load', () => {
+  initAudio();
   setTimeout(() => runPhase(0), 500);
-})
-/* ═══════════════════════════════════════════
-    AUDIO LOGIC — Фоновая музыка
-   ═══════════════════════════════════════════ */
-function initBackgroundMusic() {
-  const music = document.getElementById('bg-music');
-  
-  // Громкость 15% (чтобы не заглушала мысли)
-  music.volume = 0.15; 
-
-  // Функция запуска
-  const startAudio = () => {
-    music.play().catch(err => {
-      console.log("Автозапуск заблокирован браузером. Музыка включится после клика.");
-    });
-    // Удаляем слушатели после первого срабатывания
-    document.removeEventListener('click', startAudio);
-    document.removeEventListener('keydown', startAudio);
-  };
-
-  // Слушаем первый клик или нажатие клавиши пользователя
-  document.addEventListener('click', startAudio);
-  document.addEventListener('keydown', startAudio);
-}
-
-// Вызываем инициализацию сразу
-initBackgroundMusic();
-;
+});
 </script>
 </body>
 </html>
